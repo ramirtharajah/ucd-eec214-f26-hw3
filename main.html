@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Rajeevan Amirtharajah Dept. of Electrical and Computer Engineering University of California, Davis" />
+  <title>EEC 214 Fall 2026 Homework #3</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><strong><u>EEC 214 Fall 2026 Homework
+#3</u></strong></h1>
+<p class="author">Rajeevan Amirtharajah<br />
+Dept. of Electrical and Computer Engineering<br />
+University of California, Davis</p>
+<p class="date">Issued: October 7, 2026<br />
+Due: October 14, 2026, 11:59 PM by Canvas upload.</p>
+</header>
+<p><span><strong>Reference:</strong></span> Gray, Hurst, Lewis,
+Meyer <span class="citation" data-cites="graymeyer-book4"></span>. Any
+edition is fine.</p>
+<p>Use the following device parameters for the problems in this
+assignment.</p>
+<p><span><strong>NMOS Transistor Parameters:</strong></span></p>
+<ul>
+<li><p>Threshold Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>N</mi></mrow></msub><mo>=</mo><mn>349.7</mn></mrow><annotation encoding="application/x-tex">V_{TN} = 349.7</annotation></semantics></math>
+mV</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>270</mn></mrow><annotation encoding="application/x-tex">W = 270</annotation></semantics></math>
+nm</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>180</mn></mrow><annotation encoding="application/x-tex">L = 180</annotation></semantics></math>
+nm</p></li>
+<li><p>Process Transconductance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>104.7</mn><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu C_{ox} = 104.7 \mu</annotation></semantics></math>A/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Body Effect Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>0.297</mn></mrow><annotation encoding="application/x-tex">\gamma = 0.297</annotation></semantics></math>
+V/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><annotation encoding="application/x-tex">^{1/2}</annotation></semantics></math></p></li>
+<li><p>Channel Length Modulation Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.115</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.115</annotation></semantics></math>
+V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">^{-1}</annotation></semantics></math></p></li>
+<li><p>Gate Oxide Capacitance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">C_{ox} = 10</annotation></semantics></math>
+fF/<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>m<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Fermi Level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mn>2</mn><msub><mi>ϕ</mi><mi>F</mi></msub><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>0.6</mn></mrow><annotation encoding="application/x-tex">|2\phi_{F}| = 0.6</annotation></semantics></math>
+V</p></li>
+</ul>
+<p><span><strong>PMOS Transistor Parameters:</strong></span></p>
+<ul>
+<li><p>Threshold Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>P</mi></mrow></msub><mo>=</mo><mi>−</mi><mn>269.5</mn></mrow><annotation encoding="application/x-tex">V_{TP} = -269.5</annotation></semantics></math>
+mV</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>270</mn></mrow><annotation encoding="application/x-tex">W = 270</annotation></semantics></math>
+nm</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>180</mn></mrow><annotation encoding="application/x-tex">L = 180</annotation></semantics></math>
+nm</p></li>
+<li><p>Process Transconductance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>38.3</mn><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu C_{ox} = 38.3 \mu</annotation></semantics></math>A/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Body Effect Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>0.066</mn></mrow><annotation encoding="application/x-tex">\gamma = 0.066</annotation></semantics></math>
+V/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><annotation encoding="application/x-tex">^{1/2}</annotation></semantics></math></p></li>
+<li><p>Channel Length Modulation Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.188</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.188</annotation></semantics></math>
+V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">^{-1}</annotation></semantics></math></p></li>
+<li><p>Gate Oxide Capacitance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>10.7</mn></mrow><annotation encoding="application/x-tex">C_{ox} = 10.7</annotation></semantics></math>
+fF/<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>m<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Fermi Level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mn>2</mn><msub><mi>ϕ</mi><mi>F</mi></msub><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>0.6</mn></mrow><annotation encoding="application/x-tex">|2\phi_{F}| = 0.6</annotation></semantics></math>
+V</p></li>
+</ul>
+<p>[ps2ans1]</p>
+<h1 id="linear-regulator-feedback-analysis">Linear Regulator Feedback
+Analysis</h1>
+<figure id="fig:linRegFeedback" data-latex-placement="htp">
+<div class="center">
+<p><img src="./linearRegulatorFeedback.png" style="width:80.0%"
+alt="A block diagram of a feedback system representing a linear regulator with VREF at the input, VOUT fed back through a resistive divider, and input voltage and load current disturbance inputs." /></p>
+</div>
+<figcaption>Linear regulator feedback block diagram.</figcaption>
+</figure>
+<p>Consider the feedback block diagram that models a source-follower
+linear regulator shown in Figure <a href="#fig:linRegFeedback"
+data-reference-type="ref" data-reference="fig:linRegFeedback">1</a>.</p>
+<div id="sec:TFrefOut" class="prob">
+<p><strong>Problem 1</strong>. <em><span><em>Calculate the closed-loop
+transfer function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi><mo stretchy="false" form="postfix">)</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><msub><mi>V</mi><mrow><mi>R</mi><mi>E</mi><mi>F</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">H(s) =
+     V_{OUT)}(s)/V_{REF}(s)</annotation></semantics></math>. What is the
+location of the closed-loop pole? How does the closed-loop pole location
+compare to the op amp pole?</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:TFinOut" class="prob">
+<p><strong>Problem 2</strong>. <em><span><em>Calculate the closed-loop
+transfer function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>I</mi><mi>N</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi><mo stretchy="false" form="postfix">)</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><msub><mi>V</mi><mrow><mi>I</mi><mi>N</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">H_{IN}(s) =
+     V_{OUT)}(s)/V_{IN}(s)</annotation></semantics></math>. What is the
+attenuation of line voltage disturbances at DC?</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:TFloadOut" class="prob">
+<p><strong>Problem 3</strong>. <em><span><em>Calculate the closed-loop
+transfer function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mrow><mi>L</mi><mi>D</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi><mo stretchy="false" form="postfix">)</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><msub><mi>I</mi><mrow><mi>L</mi><mi>D</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>s</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">H_{LD}(s) =
+     V_{OUT)}(s)/I_{LD}(s)</annotation></semantics></math>. What is the
+attenuation of load current disturbances at DC?</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<p>[ps2ans2]</p>
+<h1 id="nmos-source-follower-linear-regulator">NMOS Source Follower
+Linear Regulator</h1>
+<figure id="fig:linReg" data-latex-placement="htp">
+<div class="center">
+<p><img src="./srcFollowerLinRegulator.png" style="height:3.5in"
+alt="An NMOS source follower linear regulator circuit schematic with a Norton equivalent load circuit." /></p>
+</div>
+<figcaption>NMOS source follower linear regulator.</figcaption>
+</figure>
+<p>Consider the NMOS source-follower linear regulator shown in Figure <a
+href="#fig:linReg" data-reference-type="ref"
+data-reference="fig:linReg">2</a>. Assume the op amp has ideal gain and
+input impedance in the problems below. The linear regulator is supposed
+to satisfy the following specifications:</p>
+<ul>
+<li><p>Input Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>I</mi><mi>N</mi></mrow></msub><mo>=</mo><mn>1.8</mn></mrow><annotation encoding="application/x-tex">V_{IN} = 1.8</annotation></semantics></math>
+V</p></li>
+<li><p>Reference Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>R</mi><mi>E</mi><mi>F</mi></mrow></msub><mo>=</mo><mn>1.0</mn></mrow><annotation encoding="application/x-tex">V_{REF} = 1.0</annotation></semantics></math>
+V</p></li>
+<li><p>Output Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi></mrow></msub><mo>=</mo><mn>1.0</mn></mrow><annotation encoding="application/x-tex">V_{OUT} = 1.0</annotation></semantics></math>
+V</p></li>
+<li><p>Max Load Current
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mrow><mi>L</mi><mi>D</mi></mrow></msub><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">I_{LD} = 100</annotation></semantics></math>
+mA</p></li>
+<li><p>Min Load Current
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mrow><mi>L</mi><mi>D</mi></mrow></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">I_{LD} = 1</annotation></semantics></math>
+mA</p></li>
+<li><p>Norton Equivalent Load Resistance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>L</mi><mi>D</mi></mrow></msub><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">R_{LD} = 100</annotation></semantics></math>
+k<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math></p></li>
+<li><p>Op Amp Output Swing 0.1 - 1.7 V</p></li>
+</ul>
+<div id="sec:DOvoltage" class="prob">
+<p><strong>Problem 4</strong>. <em><span><em>Calculate the threshold
+voltage of the NMOS transistor, the dropout voltage, and the minimum
+input voltage of the regulator.</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:NMOSsize0" class="prob">
+<p><strong>Problem 5</strong>. <em><span><em>Determine the width
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>
+and length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+of the NMOS transistor that satisfies the specifications above
+<span><strong>neglecting channel length modulation</strong></span>. Your
+transistor dimensions may be very large. Hint: which specification
+limits the current that can be sourced by the NMOS device?</em>
+</span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:Iopamp0" class="prob">
+<p><strong>Problem 6</strong>. <em><span><em>The required bias current
+for the output stage of the opamp is determined by the required slew
+rate on the gate of the power NMOS. Given the sizes found in Problem <a
+href="#sec:NMOSsize0" data-reference-type="ref"
+data-reference="sec:NMOSsize0">5</a>, find the minimum required op amp
+output stage current given that the opamp must be able to drive the NMOS
+gate from its minimum value to its maximum value in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">\leq 10</annotation></semantics></math>
+ns.</em></span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:LinRegEff0" class="prob">
+<p><strong>Problem 7</strong>. <em><span><em>Calculate the ideal
+efficiency of the linear regulator and the actual efficiency at both
+maximum and minimum load current assuming the opamp is powered from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>I</mi><mi>N</mi></mrow></msub><annotation encoding="application/x-tex">V_{IN}</annotation></semantics></math>
+and only the opamp output stage current is
+signficant.</em></span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:NMOSsize1" class="prob">
+<p><strong>Problem 8</strong>. <em><span><em>Recalculate the required
+width and length of the NMOS device including channel length modulation
+for the drain current
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.115</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.115</annotation></semantics></math>
+V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">^{-1}</annotation></semantics></math>).
+Is there a significant change in size?</em></span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:WithLambda" class="prob">
+<p><strong>Problem 9</strong>. <em><span><em>Repeat your calculations
+from Problems <a href="#sec:Iopamp0" data-reference-type="ref"
+data-reference="sec:Iopamp0">6</a> and <a href="#sec:LinRegEff0"
+data-reference-type="ref" data-reference="sec:LinRegEff0">7</a> given
+the transistor dimensions found in Problem <a href="#sec:NMOSsize1"
+data-reference-type="ref" data-reference="sec:NMOSsize1">8</a>. Is there
+a significant change in efficiency?</em></span></em></p>
+<div class="sol">
+
+</div>
+</div>
+</body>
+</html>
